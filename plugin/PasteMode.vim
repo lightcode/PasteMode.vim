@@ -8,14 +8,7 @@ endif
 
 let g:pastemode_loaded = 1
 
-let b:pastemode_isenabled = 0
-
-
 function! s:enable(bang)
-    if !exists("b:pastemode_isenabled")
-        return
-    endif
-
     if b:pastemode_isenabled == 1
         if !a:bang
             echom "PasteMode is already enabled"
@@ -44,10 +37,6 @@ function! s:enable(bang)
 endfunction
 
 function! s:disable(bang)
-    if !exists("b:pastemode_isenabled")
-        return
-    endif
-
     if b:pastemode_isenabled == 0
         if !a:bang
             echom 'PasteMode is not enabled'
@@ -70,16 +59,18 @@ function! s:disable(bang)
 endfunction
 
 function! s:toggle()
-    if !exists("b:pastemode_isenabled")
-        return
-    endif
-
     if b:pastemode_isenabled == 0
         call s:enable(1)
     else
         call s:disable(1)
     endif
 endfunction
+
+
+augroup PasteMode
+    autocmd!
+    autocmd BufReadPre,FileReadPre * let b:pastemode_isenabled = 0
+augroup END
 
 
 command! -nargs=* -range -bang PasteModeEnable call s:enable(<bang>0)

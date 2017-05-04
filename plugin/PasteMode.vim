@@ -67,7 +67,7 @@ function! s:toggle()
 endfunction
 
 
-augroup PasteMode
+augroup pastemode_group
     autocmd!
     autocmd BufReadPre,FileReadPre * let b:pastemode_isenabled = 0
 augroup END

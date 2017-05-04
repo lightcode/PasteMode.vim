@@ -32,8 +32,8 @@ function! s:enable(bang)
 
     setlocal paste
 
-    :GitGutterDisable
-    :SyntasticReset
+    if exists(':GitGutterDisable') | :GitGutterDisable | endif
+    if exists(':SyntasticReset') | :SyntasticReset | endif
 endfunction
 
 function! s:disable(bang)
@@ -54,8 +54,8 @@ function! s:disable(bang)
 
     setlocal nopaste
 
-    :GitGutterEnable
-    :SyntasticCheck
+    if exists(':GitGutterEnable') | :GitGutterEnable | endif
+    if exists(':SyntasticCheck') | :SyntasticCheck | endif
 endfunction
 
 function! s:toggle()

@@ -8,7 +8,7 @@ endif
 
 let g:pastemode_loaded = 1
 
-function! s:enable(bang)
+function! s:pastemode_enable(bang)
     if b:pastemode_isenabled == 1
         if !a:bang
             echom "PasteMode is already enabled"
@@ -36,7 +36,7 @@ function! s:enable(bang)
     if exists(':SyntasticReset') | :SyntasticReset | endif
 endfunction
 
-function! s:disable(bang)
+function! s:pastemode_disable(bang)
     if b:pastemode_isenabled == 0
         if !a:bang
             echom 'PasteMode is not enabled'
@@ -58,21 +58,21 @@ function! s:disable(bang)
     if exists(':SyntasticCheck') | :SyntasticCheck | endif
 endfunction
 
-function! s:toggle()
+function! s:pastemode_toggle()
     if b:pastemode_isenabled == 0
-        call s:enable(1)
+        call s:pastemode_enable(1)
     else
-        call s:disable(1)
+        call s:pastemode_disable(1)
     endif
 endfunction
 
 
 augroup pastemode_group
     autocmd!
-    autocmd BufReadPre,FileReadPre * let b:pastemode_isenabled = 0
+    autocmd BufEnter * let b:pastemode_isenabled = 0
 augroup END
 
 
-command! -nargs=* -range -bang PasteModeEnable call s:enable(<bang>0)
-command! -nargs=* -range -bang PasteModeDisable call s:disable(<bang>0)
-command! -nargs=0 PasteModeToggle  call s:toggle()
+command! -nargs=* -range -bang PasteModeEnable call s:pastemode_enable(<bang>0)
+command! -nargs=* -range -bang PasteModeDisable call s:pastemode_disable(<bang>0)
+command! -nargs=0 PasteModeToggle  call s:pastemode_toggle()

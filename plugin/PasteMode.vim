@@ -69,7 +69,9 @@ endfunction
 
 augroup pastemode_group
     autocmd!
-    autocmd BufEnter * let b:pastemode_isenabled = 0
+    autocmd BufEnter    * let b:pastemode_isenabled = 0
+    autocmd BufLeave    * :PasteModeDisable!
+    autocmd InsertLeave * :PasteModeDisable!
 augroup END
 
 

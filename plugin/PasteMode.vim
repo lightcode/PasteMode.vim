@@ -32,8 +32,12 @@ function! s:pastemode_enable(bang)
 
     setlocal paste
 
-    if exists(':GitGutterDisable') | :GitGutterDisable | endif
-    if exists(':SyntasticReset') | :SyntasticReset | endif
+    if exists(':GitGutterDisable')
+        :GitGutterDisable
+    endif
+    if exists(':SyntasticReset')
+        :SyntasticReset
+    endif
 endfunction
 
 function! s:pastemode_disable(bang)
@@ -54,8 +58,12 @@ function! s:pastemode_disable(bang)
 
     setlocal nopaste
 
-    if exists(':GitGutterEnable') | :GitGutterEnable | endif
-    if exists(':SyntasticCheck') | :SyntasticCheck | endif
+    if exists(':GitGutterEnable')
+        :GitGutterEnable
+    endif
+    if exists(':SyntasticCheck')
+        :SyntasticCheck
+    endif
 endfunction
 
 function! s:pastemode_toggle()
